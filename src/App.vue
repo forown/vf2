@@ -8,6 +8,7 @@
       <v-app-bar-nav-icon @click="drawer = !drawer"/>
       <site-title :title="title"></site-title>
        <v-spacer/>
+       <v-btn icon @click="save"><v-icon>mdi-check</v-icon></v-btn>
     </v-app-bar>
      <v-navigation-drawer app v-model="drawer">
         <site-menu></site-menu>
@@ -32,6 +33,17 @@ export default {
       drawer: false,
       title: '나의 타이틀이다',
       footer: '푸터입니다.'
+    }
+  },
+  mounted () {
+    console.log(this.$firebase)
+  },
+  methods: {
+    save () {
+      console.log('save@@@')
+      this.$firebase.database().ref().child('abcd').set({
+        title: 'abcd', text: 'ttttt'
+      })
     }
   }
 }
